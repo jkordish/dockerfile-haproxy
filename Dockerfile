@@ -2,9 +2,10 @@
 FROM ubuntu:14.04
 
 # Install Haproxy.
+RUN apt-get -y install software-properties-common
 RUN add-apt-repository ppa:vbernat/haproxy-1.5
-RUN aptitude update && aptitude -fry upgrade
-RUN aptitude -fry install haproxy
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get -y install haproxy wget cloud-utils
 
 RUN sed -i 's/^ENABLED=.*/ENABLED=1/' /etc/default/haproxy
 

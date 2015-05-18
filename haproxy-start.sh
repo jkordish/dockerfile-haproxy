@@ -7,6 +7,6 @@ CONFIG="haproxy.cfg"
 cd "$HAPROXY"
 
 exec consul-template \
-  -consul=localhost:8500 \
-  -template "/tmp/template.ctmpl:/tmp/result"
-  -template="/haproxy.ctmpl:/haproxy.cfg:service haproxy reload"
+  -log-level debug \
+  -consul=$(/usr/bin/ec2metadata --local-ip):8500 \
+  -template="/etc/haproxy/haproxy.ctmpl:/etc/haproxy/haproxy.cfg:service haproxy reload"
