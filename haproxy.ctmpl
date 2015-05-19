@@ -24,8 +24,8 @@ defaults
     errorfile 504 /etc/haproxy/errors/504.http
 
 frontend  main *:443
-    default_backend    tap-carinfex
+    default_backend webserver
 
 backend tap-carinfex
-    balance roundrobin{{range service "tap-carnifex"}}
+    balance roundrobin{{range service "webserver"}}
     server {{.ID}} {{.Address}}:{{.Port}} check{{end}}
