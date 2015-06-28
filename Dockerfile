@@ -10,7 +10,7 @@ RUN apt-get -y install haproxy wget cloud-utils
 RUN sed -i 's/^ENABLED=.*/ENABLED=1/' /etc/default/haproxy
 
 # Consul-Template
-RUN wget https://github.com/hashicorp/consul-template/releases/download/v0.9.0/consul-template_0.9.0_linux_amd64.tar.gz -O /tmp/consul-template.tar.gz
+RUN wget https://github.com/hashicorp/consul-template/releases/download/v0.10.0/consul-template_0.10.0_linux_amd64.tar.gz -O /tmp/consul-template.tar.gz
 RUN tar -xvzf /tmp/consul-template.tar.gz -C /usr/local/bin --strip-components=1
 
 # Add files.
