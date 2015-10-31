@@ -5,17 +5,16 @@ FROM ubuntu:14.04
 RUN apt-get -y install software-properties-common
 RUN add-apt-repository ppa:vbernat/haproxy-1.5
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get -y install haproxy wget cloud-utils
+RUN apt-get -y install haproxy wget cloud-utils unzip
 
 RUN sed -i 's/^ENABLED=.*/ENABLED=1/' /etc/default/haproxy
 
 # Consul-Template
-RUN wget https://github.com/hashicorp/consul-template/releases/download/v0.10.0/consul-template_0.10.0_linux_amd64.tar.gz -O /tmp/consul-template.tar.gz
-RUN tar -xvzf /tmp/consul-template.tar.gz -C /usr/local/bin --strip-components=1
+RUN wget https://releases.hashicorp.com/consul-template/0.11.1/consul-template_0.11.1_linux_amd64.zip -O /tmp/consul-template.zip
+RUN unzip /tmp/consul-template.zip -d /usr/local/bin
 
 # Add files.
 ADD haproxy.ctmpl /etc/haproxy/haproxy.ctmpl
-#ADD haproxy.cfg /etc/haproxy/haproxy.cfg
 ADD haproxy-start.sh /haproxy-start
 
 # Define working directory.
